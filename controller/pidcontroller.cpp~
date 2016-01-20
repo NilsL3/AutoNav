@@ -1,0 +1,64 @@
+#include "ros/ros.h"
+//#include "ardrone_autonomy/Navdata.h" //recibe datos de navegacion
+#include "geometry_msgs/PoseStamped.h"
+#include "geometry_msgs/Twist.h" //envia comandos al robot
+// Nodo de Contol de altura
+	
+class pidcontroller
+{
+
+public:	
+	pidcontroller(){
+    //Topic 
+    pub_ = n_.advertise<geometry_msgs::Twist>("/cmd_vel", 1); //topico donde se va a publicar(para enviar instrucciones al drone)
+
+    //Topic 
+    sub_ = n_.subscribe("/lsd_slam/pose", 1, &pidcontroller::callback, this); //Topico para recibir los datos de navegacion (ver documentacion)
+		}
+	void callback(const geometry_msgs::PoseStamped &msg); // función donde se implementa el controlador
+	//variables de control
+	int referencia=180; // la altura de referencia
+	
+	float deltaT = 1.0/20.0;	
+	float Kph = 0.5;	
+	float Kih = 0.1*deltaT;
+	float Kdh = 0.1/deltaT;	
+
+	float errorx_1 = 0;
+	float errory_1 = 0;
+	float errorh,errorh_1;
+	float errorH = errorh_1 = 0;
+	
+	private : //defininimos objetos de ros
+	ros::NodeHandle n_; //crear nodo
+	ros::Publisher pub_; // publica
+	ros::Subscriber sub_;//suscribe
+
+};
+
+void pidcontroller::callback(const geometry_msgs::PoseStamped &msg){
+	//geometry_msgs::Twist msgOut; //creamos objeto para enviar comandos al drone
+	//std_msgs::Int32 checking; 
+	ROS_INFO_STREAM("posY ="<<msg.pose.position.z); // en la consola imprimimos la altura del drone
+	
+	
+	//errorh = referencia -msg.data;//
+	//ROS_INFO_STREAM("errorh ="<<errorh);
+	//control PID
+	//errorH += errorh;			
+	//msgOut.linear.z = (Kph*errorh + Kih*errorH +  Kdh*(errorh-errorh_1))/referencia;
+	//errorh_1 = errorh;
+	
+	
+	//publicar
+	//pub_.publish(msgOut);
+	
+	}
+	
+int main(int argc, char **argv){
+  //inicializamos el nodo cont_alt 	  
+  ros::init(argc, argv, "pid_control");
+  pidcontroller control;
+  //llamamos al callback hasta que exista una interrupcion
+  ros::spin();
+	}

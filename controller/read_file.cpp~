@@ -1,0 +1,28 @@
+#include "ros/ros.h"
+#include <fstream>
+#include <vector>
+#include <iostream>
+#include <ros/package.h>
+
+std::vector<double> vec;
+
+void readDATA(){
+double value;
+std::ifstream myFile;
+//myFile.open("~/.ros/catkin_ws/src/ORB_SLAM/orb_slam/KeyFRameTrajectory.txt", std::ios::app); 
+myFile.open("ros::package::getPath("ORB_SLAM") + /orb_slam + /KeyFRameTrajectory.txt", std::ios::app); 
+if (myFile.is_open()){
+    std::cout << "File is open."<<std::endl;
+    while(myFile >> value){
+        vec.push_back(value);
+        std::cout << "value is " <<value<< std::endl;
+        }
+    myFile.close();
+}
+else std::cout << "Unable to open the file"; 
+}
+
+int main(){
+     readDATA();
+return 0;
+}

@@ -1,0 +1,6 @@
+<launch>
+
+	<node pkg="controller" type="navcontrol" name="pid_control" output="screen"/>
+	<rosparam file="$(find controller)/waypointPlanner.yaml" command="load" /> 
+
+</launch>
