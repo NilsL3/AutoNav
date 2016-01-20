@@ -1,6 +1,0 @@
-<launch>
-
-	<node pkg="tf_pose" type="tf_pose" name="tf_pose" output="screen"/>
-	<node pkg="tf_pose" type="tf_pose" name="obsBox" output="screen"/>
-	
-</launch>
