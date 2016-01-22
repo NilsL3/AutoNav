@@ -1,6 +1,7 @@
 This is a ROS package for the autonomous flight of the Parrot AR Drone 2.0 using  ORB-SLAM (Raúl Mur-Artal, 2015) for the position and yaw estimation of the quadrocopter. This controller regulates, the x position, y position and yaw.
 
 1. Related paper. Please, refer to the following paper whenever you make use of this free code.
+
 J. Martinez-Carranza, Nils Lowen, F. Marquez, E.O. García Rodriguez, W. Mayol-Cuevas. Towards Autonomous Flight of Micro Aerial Vehicles using ORB-SLAM. IEEE 3rd Workshop on Research, Education and Development of Unmanned Aerial Systems. RED-UAS 2015. Cancún, México. November, 2015.
 
 The paper can be found under the following link: https://ccc.inaoep.mx/~carranza/articles/reduas15AF.pdf
